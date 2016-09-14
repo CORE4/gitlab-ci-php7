@@ -1,0 +1,11 @@
+Package: php5-cli
+Pin: origin ""
+Pin-Priority: -1
+
+Package: php5-common
+Pin: origin ""
+Pin-Priority: -1
+
+Package: php5-fpm
+Pin: origin ""
+Pin-Priority: -1
