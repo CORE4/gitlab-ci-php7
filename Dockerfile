@@ -47,6 +47,8 @@ RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
 
 COPY config/php7-cli.ini /etc/php/7.0/cli/php.ini
 
+COPY config/prepare_environment /usr/local/bin/prepare_environment
+
 RUN cd /usr/local/bin/ && curl https://getcomposer.org/installer | php && mv composer.phar composer
 
 RUN gem install bundler
