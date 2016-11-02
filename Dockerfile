@@ -55,8 +55,8 @@ RUN gem install bundler
 RUN bundle config --global silence_root_warning 1
 
 # Use correct Port for git
-RUN mkdir -p ~/.ssh
-COPY config/ssh_config ~/.ssh/config
+RUN mkdir -p /root/.ssh
+COPY config/ssh_config /root/.ssh/config
 
 # Preset some environment vars
 ENV LC_ALL=en_US.UTF-8 \
