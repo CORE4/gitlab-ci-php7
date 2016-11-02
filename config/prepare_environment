@@ -4,31 +4,27 @@
 eval $(ssh-agent -s)
 
 # Add the SSH key for reading subrepositories
-
 [[ -n "$SSH_REPOSITORY_KEY" ]] && ssh-add <(echo "$SSH_REPOSITORY_KEY")
+unset SSH_REPOSITORY_KEY
 
 # Add the SSH key for live deployment (one per client)
 [[ -n "$SSH_DEPLOYMENT_KEY" ]] && ssh-add <(echo "$SSH_DEPLOYMENT_KEY")
+unset SSH_DEPLOYMENT_KEY
 
 # Add the SSH key for staging deployment (galactica and maybe others)
 [[ -n "$SSH_STAGING_KEY" ]] && ssh-add <(echo "$SSH_STAGING_KEY")
+unset SSH_STAGING_KEY
 
-# For Docker builds disable host key checking. Be aware that by adding that
-# you are suspectible to man-in-the-middle attacks.
-mkdir -p ~/.ssh
+# Add known hosts from project to the current user
 [ -f /.dockerenv -a -f .known_hosts ] && cp .known_hosts ~/.ssh/known_hosts
-
-# Set locale to UTF-8, otherwise Ruby tries to read files as US-ASCII
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-# Use correct Port for git
-echo -e "\nHost git.core4.de\n\tPort 22225" >> ~/.ssh/config
 
 # Set cache directories
 mkdir -p "/cache/$CI_PROJECT_NAME"
 npm config set cache "/cache/$CI_PROJECT_NAME/npm"
 export COMPOSER_HOME="/cache/$CI_PROJECT_NAME/composer"
-export COMPOSER_NO_INTERACTION=1
-export COMPOSER_ALLOW_SUPERUSER=1 # only within docker
 export GEM_HOME="/cache/$CI_PROJECT_NAME/gems"
+
+# Add authentication to composer
+mkdir -p $COMPOSER_HOME
+echo "$COMPOSER_BASE64" | base64 -d > $COMPOSER_HOME/auth.json
+unset COMPOSER_BASE64

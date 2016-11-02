@@ -52,3 +52,13 @@ COPY config/prepare_environment /usr/local/bin/prepare_environment
 RUN cd /usr/local/bin/ && curl https://getcomposer.org/installer | php && mv composer.phar composer
 
 RUN gem install bundler
+RUN bundle config --global silence_root_warning 1
+
+# Use correct Port for git
+RUN mkdir -p ~/.ssh && echo -e "\nHost git.core4.de\n\tPort 22225" >> ~/.ssh/config
+
+# Preset some environment vars
+ENV LC_ALL=en_US.UTF-8
+    LANG=en_US.UTF-8
+    COMPOSER_NO_INTERACTION=1
+    COMPOSER_ALLOW_SUPERUSER=1
