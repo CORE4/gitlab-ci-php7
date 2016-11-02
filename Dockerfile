@@ -55,7 +55,8 @@ RUN gem install bundler
 RUN bundle config --global silence_root_warning 1
 
 # Use correct Port for git
-RUN mkdir -p ~/.ssh && echo -e "\nHost git.core4.de\n\tPort 22225" >> ~/.ssh/config
+RUN mkdir -p ~/.ssh
+COPY config/ssh_config ~/.ssh/config
 
 # Preset some environment vars
 ENV LC_ALL=en_US.UTF-8 \

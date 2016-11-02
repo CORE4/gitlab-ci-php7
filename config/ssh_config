@@ -1,0 +1,3 @@
+Host git.core4.de
+    Port 22225
+    User git
