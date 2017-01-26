@@ -5,9 +5,9 @@ RUN apt-get update -y && apt-get install -y curl locales
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 COPY config/blacklist_php5 /etc/apt/preferences.d/blacklist_php5
-COPY config/dotdeb.list /etc/apt/sources.list.d/dotdeb.list
-COPY config/dotdeb.gpg /tmp/dotdeb.gpg
-RUN apt-key add /tmp/dotdeb.gpg
+COPY config/php71.list /etc/apt/sources.list.d/php71.list
+COPY config/php71.gpg /tmp/php71.gpg
+RUN apt-key add /tmp/php71.gpg
 
 # Switch to Europe/Berlin
 RUN ln --force --symbolic "/usr/share/zoneinfo/Europe/Berlin" "/etc/localtime"
@@ -29,23 +29,24 @@ RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
     pkg-config \
     imagemagick \
     git \
-    php7.0-dev \
-    php7.0-cli \
+    php7.1-dev \
+    php7.1-cli \
     php-pear \
-    php7.0-mysql \
-    php7.0-curl \
-    php7.0-imagick \
-    php7.0-zip \
-    php7.0-mcrypt \
-    php7.0-redis \
-    php7.0-gd \
-    php7.0-fpm \
-    php7.0-intl \
-    php7.0-mbstring \
-    php7.0-xml \
-    php7.0-sqlite3
+    php7.1-mysql \
+    php7.1-curl \
+    php7.1-imagick \
+    php7.1-zip \
+    php7.1-mcrypt \
+    php7.1-redis \
+    php7.1-gd \
+    php7.1-fpm \
+    php7.1-intl \
+    php7.1-mbstring \
+    php7.1-xml \
+    php7.1-sqlite3 \
+    php7.1-soap
 
-COPY config/php7-cli.ini /etc/php/7.0/cli/php.ini
+COPY config/php7-cli.ini /etc/php/7.1/cli/php.ini
 
 COPY config/prepare_environment /usr/local/bin/prepare_environment
 
