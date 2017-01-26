@@ -1,4 +1,4 @@
-# Gitlab-CI Docker Machine for PHP7.1
+# Gitlab-CI Docker Machine for PHP7
 
 This machine is used to deploy our PHP7 applications. It comes with PHP7 (duh!), NodeJS (npm) and Ruby (bundler).
 
@@ -7,7 +7,7 @@ We use it to have a consistent environment for [Fulmar](https://github.com/CORE4
 You can use this machine via a reference in your `.gitlab-ci.yml`:
 
 ```yaml
-image: core4/gitlab-ci-php71
+image: core4/gitlab-ci-php7
 
 before-script:
     - echo "Your code to prepare the project here"
