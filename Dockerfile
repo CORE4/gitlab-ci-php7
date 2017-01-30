@@ -59,6 +59,8 @@ RUN bundle config --global silence_root_warning 1
 RUN mkdir -p /root/.ssh
 COPY config/ssh_config /root/.ssh/config
 
+RUN date "+%s" > /build_date
+
 # Preset some environment vars
 ENV LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
