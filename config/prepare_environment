@@ -22,7 +22,7 @@ unset SSH_STAGING_KEY
 if [ ! -n "$CI_PROJECT_NAME" ]; then
     echo "CI_PROJECT_NAME is not set!"
     exit 1
-end
+fi
 
 # Reset cache if necessary
 BUILD_DATE=`cat /build_date`
