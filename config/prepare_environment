@@ -18,8 +18,26 @@ unset SSH_STAGING_KEY
 # Add known hosts from project to the current user
 [ -f /.dockerenv -a -f .known_hosts ] && cp .known_hosts ~/.ssh/known_hosts
 
+# Ensure CI_PROJECT_NAME is set
+if [ ! -n "$CI_PROJECT_NAME" ]; then
+    echo "CI_PROJECT_NAME is not set!"
+    exit 1
+fi
+
+# Reset cache if necessary
+BUILD_DATE=`cat /build_date`
+CACHE_DATE=""
+if [ -f "/cache/$CI_PROJECT_NAME/cache_date" ]; then
+    CACHE_DATE=`cat /cache/$CI_PROJECT_NAME/cache_date`
+fi
+
+if [ "$BUILD_DATE" != "$CACHE_DATE" ]; then
+    rm -fr /cache/$CI_PROJECT_NAME
+fi
+
 # Set cache directories
 mkdir -p "/cache/$CI_PROJECT_NAME"
+cp /build_date "/cache/$CI_PROJECT_NAME/cache_date"
 npm config set cache "/cache/$CI_PROJECT_NAME/npm"
 export COMPOSER_HOME="/cache/$CI_PROJECT_NAME/composer"
 export GEM_HOME="/cache/$CI_PROJECT_NAME/gems"
