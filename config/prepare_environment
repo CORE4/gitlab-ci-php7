@@ -39,6 +39,7 @@ fi
 mkdir -p "/cache/$CI_PROJECT_NAME"
 cp /build_date "/cache/$CI_PROJECT_NAME/cache_date"
 npm config set cache "/cache/$CI_PROJECT_NAME/npm"
+yarn config set cache-folder "/cache/$CI_PROJECT_NAME/npm"
 export COMPOSER_HOME="/cache/$CI_PROJECT_NAME/composer"
 export GEM_HOME="/cache/$CI_PROJECT_NAME/gems"
 
