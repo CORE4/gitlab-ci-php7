@@ -45,6 +45,7 @@ RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
     php7.0-xml \
     php7.0-sqlite3
 
+RUN npm install -g yarn
 COPY config/php7-cli.ini /etc/php/7.0/cli/php.ini
 
 COPY config/prepare_environment /usr/local/bin/prepare_environment
