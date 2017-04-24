@@ -21,6 +21,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     update-locale LANG=en_US.UTF-8
 
 RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
+    rsync \
     nodejs \
     libmysqlclient-dev \
     cmake \
