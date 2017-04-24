@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ruby:2.3
 
 # The nodejs version from debian is outdated
 RUN apt-get update -y && apt-get install -y curl locales
@@ -22,8 +22,6 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 
 RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
     nodejs \
-    ruby \
-    ruby-dev \
     libmysqlclient-dev \
     cmake \
     pkg-config \
