@@ -1,13 +1,10 @@
-FROM ruby:2.3
+FROM ruby:2.4-stretch
 
 # The nodejs version from debian is outdated
 RUN apt-get update -y && apt-get install -y curl locales
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 COPY config/blacklist_php5 /etc/apt/preferences.d/blacklist_php5
-COPY config/dotdeb.list /etc/apt/sources.list.d/dotdeb.list
-COPY config/dotdeb.gpg /tmp/dotdeb.gpg
-RUN apt-key add /tmp/dotdeb.gpg
 
 # Switch to Europe/Berlin
 RUN ln --force --symbolic "/usr/share/zoneinfo/Europe/Berlin" "/etc/localtime"
@@ -23,7 +20,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
     rsync \
     nodejs \
-    libmysqlclient-dev \
+    libmariadbclient-dev \
     cmake \
     pkg-config \
     imagemagick \
@@ -42,6 +39,7 @@ RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
     php7.0-intl \
     php7.0-mbstring \
     php7.0-xml \
+    php7.0-ldap \
     php7.0-sqlite3
 
 RUN npm install -g yarn
