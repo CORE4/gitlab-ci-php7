@@ -1,4 +1,4 @@
-FROM ruby:2.4-stretch
+FROM ruby:2.5-rc-stretch
 
 # The nodejs version from debian is outdated
 RUN apt-get update -y && apt-get install -y curl locales
@@ -20,7 +20,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
     rsync \
     nodejs \
-    libmariadbclient-dev \
+    default-libmysqlclient-dev \
     cmake \
     pkg-config \
     imagemagick \
