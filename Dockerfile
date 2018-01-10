@@ -45,6 +45,9 @@ RUN apt-get update -y && apt-get dist-upgrade -y && apt-get install -y \
     php7.1-sqlite3 \
     php7.1-soap
 
+# Necessary to fix the problem with package conflicts
+RUN apt-get install -y libssl1.0-dev
+
 RUN npm install -g yarn
 
 COPY config/php7-cli.ini /etc/php/7.1/cli/php.ini
